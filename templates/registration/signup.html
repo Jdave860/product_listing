@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block header %}Signup{% endblock %}
+
+{% block content %}
+    <form class="login-form signup-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renders the signup form fields -->
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+{% endblock %}
+

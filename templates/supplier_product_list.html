@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Supplier Product List{% endblock %}
+
+{% block header %}Products{% endblock %}
+
+{% block content %}
+    <h2>Your Products</h2>
+    {% if products %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock Status</th>
+                    <th>Has Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.code }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.in_stock|yesno:"In Stock,Out of Stock" }}</td>
+                        <td>{% if product.main_image %} Yes {% else %} No {% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No products found for this supplier.</p>
+    {% endif %}
+
+    <h2>Cheaper Analogues</h2>
+    {% if cheaper_analogs %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in cheaper_analogs %}
+                    <tr>
+                        <td>{{ product.cheapest_analog_code }}</td>
+                        <td>{{ product.cheapest_analog_name }}</td>
+                        <td>{{ product.cheapest_analog_price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No cheaper analogues found.</p>
+    {% endif %}
+{% endblock %}

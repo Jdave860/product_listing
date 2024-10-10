@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Buyer Product List{% endblock %}
+
+{% block header %}
+    Products in Stock
+{% endblock %}
+
+{% block content %}
+    {% if products %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Supplier</th>
+                    <th>Main Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.code }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.supplier.name }}</td>
+                        <td>
+                            {% if product.main_image %}
+                                <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="max-width: 100px;">
+                            {% else %}
+                                No Image
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No products available in stock.</p>
+    {% endif %}
+{% endblock %}

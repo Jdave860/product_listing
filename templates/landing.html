@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Landing Page{% endblock %}
+
+{% block header %}
+    Welcome to the Product Listing Website
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        {% if user.supplier %}
+            <p>You are logged in as a supplier.</p>
+            <a href="{% url 'supplier_product_list' %}">View your products</a>
+        {% else %}
+            <p>You are logged in as a Buyer.</p>
+            <a href="{% url 'buyer_product_list' %}">View your products</a>
+        {% endif %}
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">Login</a> to continue.</p>
+    {% endif %}
+{% endblock %}
